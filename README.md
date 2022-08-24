@@ -8,59 +8,11 @@ This PoC demo requires 3 machines (virtual machines, containers or baremetal ser
 
 The above setup is based on the model architecture that can be used to evaluate AirBox.
 
-## Install AirBox
+## Install Tomcat w/ AirBox
 
-* There are no code level changes in the frontend tomcat server or backend database server to use AirBox.
+* There are no code level changes in the frontend tomcat server to use AirBox. 
 
-* AirBox can be installed by following the steps below:
-    * Log in to the test app server:
-    * Clone this repo 
-    ````git clone https://github.com/air-box/airbox-att-poc.git```
-    * Create AirBox directory
-    ```mkdir -p /opt/air-box```
-    * Copy AirBox KeyVisor binary and conf in to AirBox directory
-    ```
-    cd airbox-att-poc
-    cp  kvbin/keyvisor.so /opt/air-box/
-    cp  kvbin/keyvisor.conf /opt/air-box/
-    ```
-* There are no workflow level changes to use AirBox.
-    
-    * Normally, app server (tomcat) is run using the following command
-    ```$(CATALINA_HOME)/bin/startup.sh```
-    where $(CATALINA_HOME) is directory where tomcat server is installed, typically /opt/tomcat (see tomcat installation instructions below for details)
-    
-    * With AirBox, app server (tomcat) can be run in 2 steps ways:
-        1. Create / edit a setenv.sh in $(CATALINA_HOME) and add following lines:
-        ```
-        LD_PRELOAD=/opt/air-box/keyvisor.so
-        export LD_PRELOAD
-        ```
-        2. From $(CATALINA_HOME)/bin/ run the following command
-        ```
-        $ ./startup.sh
-        ```
-     
-## Run tomcat app server with AirBox 
-
-* You can use the following steps to run AirBox Keycentrall
-    * Log in to the keycentral server
-    * Clone this repo in your home directory
-    ````git clone https://github.com/air-box/airbox-att-poc.git```
-    * Run keycentral server
-    ```
-    $ cd airbox-att-poc/kcbin
-    $ ./keycentral
-    ```
-
-* To test, you can use the following methods: 
-    1. Command line
-        ``` curl -kv https://<Tomcat IP>:8443/examples/servlets/helloworld.html```
-    2. Web browser
-       To use browser, you will need to add the self-signed certificates this demo uses to be trusted by the browser.
-
-### Steps to deploying Apache Tomcat Server on RHEL 8
-* Setup Apache Tomcat Server
+* For steps to deploy tomcat on RHEL, please refer to steps
 
   * Install Open-jdk-11
   ```
@@ -134,3 +86,50 @@ The above setup is based on the model architecture that can be used to evaluate 
     </Connector>
     ````
   ```
+
+* AirBox can be installed by following the steps below:
+    * Log in to the test app server:
+    * Clone this repo 
+    ````git clone https://github.com/air-box/airbox-att-poc.git```
+    * Create AirBox directory
+    ```mkdir -p /opt/air-box```
+    * Copy AirBox KeyVisor binary and conf in to AirBox directory
+    ```
+    cd airbox-att-poc
+    cp  kvbin/keyvisor.so /opt/air-box/
+    cp  kvbin/keyvisor.conf /opt/air-box/
+    ```
+* There are no workflow level changes to use AirBox.
+    
+    * Normally, app server (tomcat) is run using the following command
+    ```$(CATALINA_HOME)/bin/startup.sh```
+    where $(CATALINA_HOME) is directory where tomcat server is installed, typically /opt/tomcat (see tomcat installation instructions below for details)
+    
+    * With AirBox, app server (tomcat) can be run in 2 steps ways:
+        1. Create / edit a setenv.sh in $(CATALINA_HOME) and add following lines:
+        ```
+        LD_PRELOAD=/opt/air-box/keyvisor.so
+        export LD_PRELOAD
+        ```
+        2. From $(CATALINA_HOME)/bin/ run the following command
+        ```
+        $ ./startup.sh
+        ```
+     
+## Run tomcat app server with AirBox 
+
+* You can use the following steps to run AirBox Keycentrall
+    * Log in to the keycentral server
+    * Clone this repo in your home directory
+    ````git clone https://github.com/air-box/airbox-att-poc.git```
+    * Run keycentral server
+    ```
+    $ cd airbox-att-poc/kcbin
+    $ ./keycentral
+    ```
+
+* To test, you can use the following methods: 
+    1. Command line
+        ``` curl -kv https://<Tomcat IP>:8443/examples/servlets/helloworld.html```
+    2. Web browser
+       To use browser, you will need to add the self-signed certificates this demo uses to be trusted by the browser.
