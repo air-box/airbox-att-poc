@@ -12,7 +12,7 @@ The above setup is based on the model architecture that can be used to evaluate 
 
 * There are no code level changes in the frontend tomcat server to use AirBox. 
 
-* For steps to deploy tomcat on RHEL, please refer to steps
+* Steps to deploy tomcat on RHEL
 
   * Install Open-jdk-11
   ```
@@ -133,3 +133,6 @@ The above setup is based on the model architecture that can be used to evaluate 
         ``` curl -kv https://<Tomcat IP>:8443/examples/servlets/helloworld.html```
     2. Web browser
        To use browser, you will need to add the self-signed certificates this demo uses to be trusted by the browser.
+       
+## Install DB server w/ AirBox (TBD)
+
